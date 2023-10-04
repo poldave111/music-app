@@ -1,0 +1,30 @@
+.header {
+    background-image: url('../../images/header-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.header-wrapper {
+    margin: 0 auto;
+   
+}
+
+header > * {
+    text-decoration: none;
+}
+
+.categories {
+    margin: 0 auto;
+    font-family: $font-subpar;
+    padding: 10px 15px;
+}
+
+.category {
+    color: $color-header;
+}
