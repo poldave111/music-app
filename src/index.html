@@ -39,6 +39,11 @@
           <div id="search-wrapper" class="search"></div>
         </section>
       </div>
+      <div class="ready-player-1 player">
+        <audio crossorigin>
+            <source src="./songs/AudioCoffee_Band_Positive.mp3" type="audio/mpeg">
+        </audio>
+    </div>
     <script id="template-home" type="text/x-handlebars-template">
         <h1>home</h1>
         {{}}
@@ -50,16 +55,24 @@
     </script>
 
     <script id="template-search" type="text/x-handlebars-template">
-        <h1>search</h1>
+      <div>
+        <label for="searchInput">{{label}}</label>
+        <input type="text" id="searchInput" placeholder="{{placeholder}}">
+        <button>{{buttonText}}</button>
+        <div class="searchPlayers"></div>
+      </div>
+
     </script>
 
     <script id="template-player" type="text/x-handlebars-template">
-        <div>
+        <div class="player">
             <h3>{{title}}</h3>
             {{#each categories}}
                 <span>{{this}}</span>
             {{/each}}
-            <audio src="{{filename}}"></audio>
+            <audio crossorigin>
+              <source src="{{filename}}" type="audio/mpeg">
+          </audio>
         </div>
     </script>
 

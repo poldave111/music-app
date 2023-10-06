@@ -2,35 +2,50 @@
     "songs": [
         {
             "id": 1,
-            "title": "At The Top",
+            "title": "Positive",
             "author": 1,
-            "filename": "At_The_Top_David_Renda.mp3",
-            "categories": ["Powerful", "Mystery"],
+            "filename": "./songs/AudioCoffee_Band_Positive.mp3",
+            "categories": ["Positive", "Pop"],
             "ranking": 1
         },
         {
             "id": 2,
             "title": "Silly Feet",
             "author": 1,
-            "filename": "Silly_Feet_David_Renda.mp3",
-            "categories": ["Relax", "Fun"],
+            "filename": "./songs/Silly_Feet_David_Renda.mp3",
+            "categories": ["Relax", "Exciting"],
             "ranking": 2
         },
         {
             "id": 3,
-            "title": "Western adventures",
+            "title": "Inspirational Advertising",
             "author": 2,
-            "filename": "Western_Adventures_-_David_Fesliyan.mp3",
-            "categories": ["Fun", "Western"],
+            "filename": "./songs/Inspirational_Advertising_1_David_Fesliyan.mp3",
+            "categories": ["Inspirational", "Exciting"],
             "ranking": 4
         },
         {
             "id": 4,
-            "title": "Bass trap",
+            "title": "Powerful",
             "author": 3,
-            "filename": "BASS_TRAP_Steve_Oxen.mp3",
-            "categories": ["Powerful", "Insomnia"],
+            "filename": "./songs/Powerful_David_Fesliyan.mp3",
+            "categories": ["Powerful", "Pop"],
             "ranking": 3
+        },
+        {
+            "id": 5,
+            "title": "Early Christmas Morning",
+            "author": 3,
+            "filename": "./songs/Early_Christmas_Morning_David_Robson.mp3",
+            "categories": ["Powerful", "Seasonal"],
+            "ranking": 3
+        }
+    ],
+    "search": [
+        {
+            "label": "Enter a song title:",
+            "placeholder": "Search...",
+            "buttonText": "Search"
         }
     ]
 }
