@@ -1,4 +1,5 @@
-import { settings, select, classNames } from './settings.js';
+import { settings, select, classNames, templates } from './settings.js';
+import { utils } from './utils/utils.js';
 import Home from './components/Home.js';
 import Search from './components/Search.js'
 
@@ -7,10 +8,10 @@ const app = {
         const thisApp = this;
 
         thisApp.pages = document.querySelector(select.containerOf.pages).children;
-        console.log(thisApp.pages);
+        // console.log(thisApp.pages);
 
         thisApp.navLinks = document.querySelectorAll(select.nav.links);
-        console.log(thisApp.navLinks);
+        // console.log(thisApp.navLinks);
 
         const idFromHash = window.location.hash.replace('#/', '');
 
@@ -111,17 +112,35 @@ const app = {
                 ]);
             })
             .then(function ([songs, search]) {
-                console.log('songs', songs);
-                console.log('search', search);
+               
                 // console.log('parsedResponse', parsedResponse);
                 thisApp.data.songs = songs;
                 thisApp.data.search = search;
                 thisApp.home = new Home(thisApp.data.songs);
                 thisApp.search = new Search(thisApp.data.search, thisApp.data.songs);
                 thisApp.activateCategories();
+                thisApp.generateSongs(thisApp.data.songs);
                 thisApp.initPlayer();
             })
     },
+    generateSongs: function(songs) {
+        const thisSearch = this;
+        const container = document.querySelectorAll('.players');
+
+        // container.map((cont) => {
+        //     console.log('cont', cont);
+        // })
+        console.log(container);
+        songs.map((song) => {
+            const generatedPlayer = templates.player(song)
+            let player = utils.createDOMFromHTML(generatedPlayer);
+            container.forEach((cont) => {
+                cont.appendChild(player);
+            })
+        });
+        //thisSearch.hookPlayers();
+    },
+
     initPlayer: function () {
         GreenAudioPlayer.init({
             selector: '.player',
@@ -133,6 +152,7 @@ const app = {
         const thisApp = this;
         thisApp.initData();
         thisApp.initPages();
+   
     },
 }
 

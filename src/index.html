@@ -1,70 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>music-app</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Dancing+Script:wght@400;600&family=Inter:wght@400;600;700&family=Montserrat:wght@400;600&family=Pacifico&family=Quicksand:wght@300;400;600&family=Roboto:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/css/green-audio-player.min.css">
-    <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="vendor/font/fontello.css">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>music-app</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Dancing+Script:wght@400;600&family=Inter:wght@400;600;700&family=Montserrat:wght@400;600&family=Pacifico&family=Quicksand:wght@300;400;600&family=Roboto:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/css/green-audio-player.min.css">
+  <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/font/fontello.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <header class="header">
-        <div class="main-nav">
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#discover" class="nav-link">Discover</a>
-            <a href="#search" class="nav-link">Search</a>
-          </div>
-        <div class="categories">
-
-        </div>
-    </header>
-
-    <i class="icon icon-note"></i>
-
-    <div id="pages">
-        <section id="home">
-          <div id="home-wrapper" class="home"></div>
-        </section>
-        <section id="discover">
-          <div id="discover-wrapper" class="discover">
-            <h1>jlkjlkj</h1>
-          </div>
-        </section>
-        <section id="search">
-          <div id="search-wrapper" class="search"></div>
-        </section>
-      </div>
-      <div class="ready-player-1 player">
-        <audio crossorigin>
-            <source src="./songs/AudioCoffee_Band_Positive.mp3" type="audio/mpeg">
-        </audio>
+  <header class="header">
+    <div class="main-nav">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#discover" class="nav-link">Discover</a>
+      <a href="#search" class="nav-link">Search</a>
     </div>
-    <script id="template-home" type="text/x-handlebars-template">
+    <div class="categories">
+
+    </div>
+  </header>
+
+  <i class="icon icon-note"></i>
+
+  <div id="pages">
+    <section id="home">
+      <div id="home-wrapper" class="home"></div>
+    </section>
+    <section id="discover">
+      <div id="discover-wrapper" class="discover">
+        <h1>jlkjlkj</h1>
+      </div>
+    </section>
+    <section id="search">
+      <div id="search-wrapper" class="search"></div>
+      <div class="categoriesDropdowng"></div>
+    </section>
+  </div>
+
+  <script id="template-home" type="text/x-handlebars-template">
+      <div>
         <h1>home</h1>
-        {{}}
         <audio></audio>
+        <div class="players"></div>
+      </div>
     </script>
 
-    <script id="template-discover" type="text/x-handlebars-template">
+  <script id="template-discover" type="text/x-handlebars-template">
         <h1>discover</h1>
+        <div class="players"></div>
     </script>
 
-    <script id="template-search" type="text/x-handlebars-template">
+  <script id="template-search" type="text/x-handlebars-template">
       <div>
         <label for="searchInput">{{label}}</label>
         <input type="text" id="searchInput" placeholder="{{placeholder}}">
         <button>{{buttonText}}</button>
+        <div class="players"></div>
         <div class="searchPlayers"></div>
       </div>
-
-    </script>
-
-    <script id="template-player" type="text/x-handlebars-template">
+  </script>
+  <script id="template-category-dropdown" type="text/x-handlebars-template">
+  <div>
+    <label for="categorySelect">Select a category:</label>
+    <select id="categorySelect">
+      {{#each categories}}
+        <option value="{{this}}">{{this}}</option>
+      {{/each}}
+    </select>
+  </div>
+  </script>
+  <script id="template-player" type="text/x-handlebars-template">
         <div class="player">
             <h3>{{title}}</h3>
             {{#each categories}}
@@ -76,8 +90,8 @@
         </div>
     </script>
 
-    <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
-    <script src="js/app.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
+  <script src="js/app.js" type="module"></script>
 </body>
 </html>

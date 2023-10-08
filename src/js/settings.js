@@ -4,6 +4,7 @@ export  const select = {
       discover: '#template-discover', 
       search: '#template-search',
       player: '#template-player',
+      categories: '#template-category-dropdown',
     },
     containerOf: {
       pages: '#pages',
@@ -11,6 +12,7 @@ export  const select = {
       discover: '#discover-wrapper',
       search: '#search-wrapper',
       player: '#player-wrapper',
+      categories: '.categoriesDropdown'
     },
     all: {
       menuProducts: '#product-list > .product',
@@ -119,4 +121,5 @@ export  const select = {
     discover: Handlebars.compile(document.querySelector(select.templateOf.discover).innerHTML),
     search: Handlebars.compile(document.querySelector(select.templateOf.search).innerHTML),
     player: Handlebars.compile(document.querySelector(select.templateOf.player).innerHTML), 
+    categories: Handlebars.compile(document.querySelector(select.templateOf.categories).innerHTML)
   };
