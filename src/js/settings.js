@@ -113,6 +113,7 @@ export  const select = {
       url: '//localhost:3131',
       songs: 'songs',
       search: 'search',
+      home: 'home'
     }
   };
   

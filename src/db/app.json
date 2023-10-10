@@ -47,5 +47,10 @@
             "placeholder": "Search...",
             "buttonText": "Search"
         }
+    ],
+    "home": [
+        {
+           "title": "Home"
+        }
     ]
 }

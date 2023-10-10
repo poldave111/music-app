@@ -48,8 +48,7 @@
 
   <script id="template-home" type="text/x-handlebars-template">
       <div>
-        <h1>home</h1>
-        <audio></audio>
+        <h1>{{title}}</h1>
         <div class="players"></div>
       </div>
     </script>
@@ -79,7 +78,7 @@
   </div>
   </script>
   <script id="template-player" type="text/x-handlebars-template">
-        <div class="player">
+        <div class="player" data-src="{{filename}}">
             <h3>{{title}}</h3>
             {{#each categories}}
                 <span>{{this}}</span>

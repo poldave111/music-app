@@ -3,10 +3,9 @@ import { utils } from '../utils/utils.js';
 
 
 class Home {
-    constructor(data) { // constructor runs only once when class is instantiated!!!! 
+    constructor(data, songs) { // constructor runs only once when class is instantiated!!!! 
         const thisHome = this; 
         thisHome.data = data; 
-        console.log('home data', data);
         thisHome.getElements();
         thisHome.render(data);
     }
@@ -17,12 +16,14 @@ class Home {
        console.log(thisHome.wrapper);
     }
 
-    render() {
+    render(data) {
         const thisHome = this;
-        const generatedHTML = templates.home();
+        const generatedHTML = templates.home(data[0]);
         thisHome.element = utils.createDOMFromHTML(generatedHTML);
         thisHome.wrapper.appendChild(thisHome.element);
     }
+
+
     // render(data) {
     //     const thisHome = this;
     //     //thisHome.playerContainer = document.querySelector('.home');

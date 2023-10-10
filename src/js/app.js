@@ -43,7 +43,7 @@ const app = {
     },
     activatePage: function (pageId) {
         const thisApp = this;
-
+        console.log('pageId', pageId);
         /* add class "active" to matching pages, remove from non-matching */
         for (let page of thisApp.pages) {
             page.classList.toggle(classNames.pages.active, page.id == pageId); // using with second argument as conditional in order to avoid writing whole long if statement.
@@ -54,6 +54,9 @@ const app = {
                 classNames.nav.active,
                 link.getAttribute('href') == '#' + pageId
             ); // using with second argument as conditional in order to avoid writing whole long if statement.
+        }
+        if(pageId === "search") {
+            thisApp.search.hideAllPlayers();       
         }
     },
     activateCategories() {
@@ -95,50 +98,47 @@ const app = {
         thisApp.data = {};
         const urls = {
             songs: settings.db.url + '/' + settings.db.songs,
-            search: settings.db.url + '/' + settings.db.search
+            search: settings.db.url + '/' + settings.db.search,
+            home: settings.db.url + '/' + settings.db.home,
         }
 
         Promise.all([
             fetch(urls.songs),
             fetch(urls.search),
-
+            fetch(urls.home),
         ]).then(function (allResponses) {
             const songsResponse = allResponses[0];
             const searchResponse = allResponses[1];
+            const homeResponse = allResponses[2];
                 return Promise.all([
                     songsResponse.json(), 
                     searchResponse.json(),
-
+                    homeResponse.json(),
                 ]);
             })
-            .then(function ([songs, search]) {
-               
-                // console.log('parsedResponse', parsedResponse);
+            .then(function ([songs, search, home]) {
                 thisApp.data.songs = songs;
                 thisApp.data.search = search;
-                thisApp.home = new Home(thisApp.data.songs);
+                thisApp.data.home = home;
+                thisApp.home = new Home(thisApp.data.home, thisApp.data.songs);
                 thisApp.search = new Search(thisApp.data.search, thisApp.data.songs);
                 thisApp.activateCategories();
                 thisApp.generateSongs(thisApp.data.songs);
                 thisApp.initPlayer();
-            })
+                thisApp.initPages();
+            });
     },
     generateSongs: function(songs) {
-        const thisSearch = this;
+        const thisApp = this;
         const container = document.querySelectorAll('.players');
-
-        // container.map((cont) => {
-        //     console.log('cont', cont);
-        // })
-        console.log(container);
+        console.log('container', container);
         songs.map((song) => {
-            const generatedPlayer = templates.player(song)
-            let player = utils.createDOMFromHTML(generatedPlayer);
+            const generatedPlayer = templates.player(song);
             container.forEach((cont) => {
+                let player = utils.createDOMFromHTML(generatedPlayer);
                 cont.appendChild(player);
-            })
+            });
         });
-        //thisSearch.hookPlayers();
     },
 
     initPlayer: function () {
@@ -151,8 +151,6 @@ const app = {
     init: function () {
         const thisApp = this;
         thisApp.initData();
-        thisApp.initPages();
-   
     },
 }
 

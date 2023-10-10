@@ -8,7 +8,7 @@ class Search {
         //thisSearch.getRightSongs(data)
         thisSearch.getElements();
         thisSearch.render(data);
-        //thisSearch.initActions(songs);
+        thisSearch.initActions(songs);
        // thisSearch.prepareDataForCategories(songs);
        //thisSearch.generateSongs(songs);
     }
@@ -21,28 +21,53 @@ class Search {
 
     initActions(songs) {
         const thisSearch = this; 
-        //thisSearch.element.querySelector('button').addEventListener('click', () => {thisSearch.getRightSongs(songs)} );
-
+        console.log('button', thisSearch.element.querySelector('button'));
+        thisSearch.element.querySelector('button').addEventListener('click', () => {thisSearch.getRightSongs(songs)} );
+        
     }
 
-    // getRightSongs(songs) {
-    //     const thisSearch = this; 
-    //     const searchInput = document.getElementById('searchInput');
-    //     //console.log('searchInput', searchInput);
-    //     const searchValue = searchInput.value.trim();
+    hideAllPlayers() {
+        const thisSearch = this; 
+        thisSearch.element.querySelectorAll('.player').forEach((elem) => elem.classList.add('invisible'));
+    }
 
-    //     thisSearch.filteredSongs = songs.filter(song => {
-    //         const lowerTitle = song.title.toLowerCase();
-    //         const lowerSearchValue = searchValue.toLowerCase();
-    //         return lowerTitle.includes(lowerSearchValue);
-    //     });
-    //     //console.log('filteredSongs', thisSearch.filteredSongs);
-    //     const containerSongSearch =  document.querySelector('.searchPlayers');
-    //     //console.log(containerSongSearch);
-    //     thisSearch.generateSongs(thisSearch.filteredSongs, containerSongSearch);
-    //     // from data choose according to search appriopriate data, 
-    //     // make any change in input field start this method, (eventListener?)
-    // }
+    getRightSongs(songs) {
+        const thisSearch = this; 
+        const searchInput = document.getElementById('searchInput');
+        //console.log('searchInput', searchInput);
+        const searchValue = searchInput.value.trim();
+        thisSearch.hideAllPlayers();
+        thisSearch.filteredSongs = songs.filter(song => {
+            const lowerTitle = song.title.toLowerCase();
+            const lowerSearchValue = searchValue.toLowerCase();
+            return lowerTitle.includes(lowerSearchValue);
+        });
+        //console.log('filteredSongs', thisSearch.filteredSongs);
+
+        const players = Array.from(thisSearch.element.querySelectorAll('.player'));
+        console.log('players', players);
+        thisSearch.filteredSongs.forEach((song) => {
+            const player = players.find((player) =>  player.getAttribute('data-src') === song.filename);
+            player.classList.remove('invisible');
+        }) 
+
+        // rightSongs.map((song) => {
+        //     let element = thisSearch.element.querySelector(`source[src="${song}"]`);
+        //     let elem = element.closest('.player.green-audio-player');
+        //     elem.classList.add("invisible");
+        //     // console.log('element', element);
+        //     // console.log('elem', elem);
+        // })
+
+        // console.log(rightSongs);
+        
+        // console.log(players[0].getAttribute("src"));
+        // const containerSongSearch =  document.querySelector('.searchPlayers');
+        // console.log(containerSongSearch);
+        // thisSearch.generateSongs(thisSearch.filteredSongs, containerSongSearch);
+        // from data choose according to search appriopriate data, 
+        // make any change in input field start this method, (eventListener?)
+    }
 
     // generateSongs(songs, container) {
     //     const thisSearch = this;
@@ -63,27 +88,25 @@ class Search {
     //     });
     // }
 
-    prepareDataForCategories(songs) {
-        const thisSearch = this; 
-        const uniqueCategories = { categories: [] };
+    // prepareDataForCategories(songs) {
+    //     const thisSearch = this; 
+    //     const uniqueCategories = { categories: [] };
 
-        songs.forEach(song => {
-            song.categories.forEach(category => {
-                if (!uniqueCategories.categories.includes(category)) {
-                    uniqueCategories.categories.push(category);
-                }
-            });
-        });
-        thisSearch.generateCategories(uniqueCategories);
-    }
+    //     songs.forEach(song => {
+    //         song.categories.forEach(category => {
+    //             if (!uniqueCategories.categories.includes(category)) {
+    //                 uniqueCategories.categories.push(category);
+    //             }
+    //         });
+    //     });
+    //     thisSearch.generateCategories(uniqueCategories);
+    // }
     generateCategories(categories) {
         const thisSearch = this; 
         //const container = document.querySelector(select.containerOf.categories);
         const generatedHTML = templates.categories(categories);
         thisSearch.element = utils.createDOMFromHTML(generatedHTML);
         container.appendChild(thisSearch.element);
-        console.log(thisSearch.element);
-        //thisSearch.searchContainer.appendChild(thisSearch.element);
     }
 
     render(data) {
