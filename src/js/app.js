@@ -2,6 +2,7 @@ import { settings, select, classNames, templates } from './settings.js';
 import { utils } from './utils/utils.js';
 import Home from './components/Home.js';
 import Search from './components/Search.js'
+import Discover from './components/Discover.js';
 
 const app = {
     initPages: function () {
@@ -126,6 +127,7 @@ const app = {
                 thisApp.generateSongs(thisApp.data.songs);
                 thisApp.initPlayer();
                 thisApp.initPages();
+                thisApp.discover = new Discover(thisApp.data.discover);
             });
     },
     generateSongs: function(songs) {

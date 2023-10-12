@@ -5,7 +5,7 @@
             "title": "Positive",
             "author": 1,
             "filename": "./songs/AudioCoffee_Band_Positive.mp3",
-            "categories": ["Positive", "Pop"],
+            "categories": ["Positive", "Pop", "Relax"],
             "ranking": 1
         },
         {
@@ -29,7 +29,7 @@
             "title": "Powerful",
             "author": 3,
             "filename": "./songs/Powerful_David_Fesliyan.mp3",
-            "categories": ["Powerful", "Pop"],
+            "categories": ["Inspirational", "Powerful", "Pop"],
             "ranking": 3
         },
         {
