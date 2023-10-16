@@ -62,17 +62,17 @@ const app = {
     },
     activateCategories() {
         const thisApp = this;
-        console.log('thisApp.data.songs', thisApp.data.songs);
-        const uniqueCategories = [];
+        //console.log('thisApp.data.songs', thisApp.data.songs);
+        thisApp.uniqueCategories = [];
         thisApp.data.songs.forEach(song => {
             song.categories.forEach(category => {
-                if (!uniqueCategories.includes(category)) {
-                    uniqueCategories.push(category);
+                if (!thisApp.uniqueCategories.includes(category)) {
+                    thisApp.uniqueCategories.push(category);
                 }
             })
         });
         let links = '';
-        uniqueCategories.forEach(category => {
+        thisApp.uniqueCategories.forEach(category => {
             links += `<a class="category" href="#${category}">${category}</a>`;
             return links;
         });
@@ -127,7 +127,8 @@ const app = {
                 thisApp.generateSongs(thisApp.data.songs);
                 thisApp.initPlayer();
                 thisApp.initPages();
-                thisApp.discover = new Discover(thisApp.data.discover);
+                console.log('zzz', thisApp.uniqueCategories);
+                thisApp.discover = new Discover(thisApp.uniqueCategories);
             });
     },
     generateSongs: function(songs) {
