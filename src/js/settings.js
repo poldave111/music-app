@@ -119,7 +119,6 @@ export  const select = {
   
   export const templates = {
     home: Handlebars.compile(document.querySelector(select.templateOf.home).innerHTML),
-    discover: Handlebars.compile(document.querySelector(select.templateOf.discover).innerHTML),
     search: Handlebars.compile(document.querySelector(select.templateOf.search).innerHTML),
     player: Handlebars.compile(document.querySelector(select.templateOf.player).innerHTML), 
     categories: Handlebars.compile(document.querySelector(select.templateOf.categories).innerHTML)

@@ -4,7 +4,7 @@ import Home from './components/Home.js';
 import Search from './components/Search.js'
 import Discover from './components/Discover.js';
 
-const app = {
+export const app = {
     initPages: function () {
         const thisApp = this;
 
@@ -127,8 +127,7 @@ const app = {
                 thisApp.generateSongs(thisApp.data.songs);
                 thisApp.initPlayer();
                 thisApp.initPages();
-                console.log('zzz', thisApp.uniqueCategories);
-                thisApp.discover = new Discover(thisApp.uniqueCategories);
+                thisApp.discover = new Discover(thisApp.uniqueCategories, thisApp.data.songs);
             });
     },
     generateSongs: function(songs) {
@@ -144,9 +143,9 @@ const app = {
         });
     },
 
-    initPlayer: function () {
+    initPlayer: function (selector = '.player') {
         GreenAudioPlayer.init({
-            selector: '.player',
+            selector,
             stopOthersOnPlay: true
         });
     },

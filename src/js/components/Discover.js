@@ -1,11 +1,14 @@
 import { templates } from '../settings.js';
 import { utils } from '../utils/utils.js';
+import { findSongsByCategory } from '../utils/categories.js';
+import { app } from '../app.js';
 
 
 class Discover {
-    constructor(uniqueCategories) { // constructor runs only once when class is instantiated!!!! 
+    constructor(uniqueCategories, songs) { // constructor runs only once when class is instantiated!!!! 
         const thisDiscover = this; 
         thisDiscover.uniqueCategories = uniqueCategories;
+        thisDiscover.songs = songs;
         thisDiscover.categoriesObject = {};
         thisDiscover.playEventCatcher(); 
         thisDiscover.getElements();
@@ -39,13 +42,30 @@ class Discover {
        const thisDiscover = this;
        thisDiscover.wrapper = document.querySelector('#discover-wrapper');
        thisDiscover.amazingButton = thisDiscover.wrapper.querySelector('.amazingButton');
-       console.log('ooo', thisDiscover.amazingButton);
+       thisDiscover.playerWrapper = thisDiscover.wrapper.querySelector('.players');
     }
 
     initActions() {
         const thisDiscover = this;
         thisDiscover.amazingButton.addEventListener("click", function () {
-            thisDiscover.findLowestValue();
+            const lowestValue = thisDiscover.findLowestValue();
+            const leastUsedCategory = Object.keys(thisDiscover.categoriesObject).find((key) => { // szukamy pierwszej kategorii która ma najniższą liczbę odtworzeń
+                return thisDiscover.categoriesObject[key] === lowestValue;
+            })
+            const foundSongs = findSongsByCategory(leastUsedCategory, thisDiscover.songs);
+            let songToShow; 
+            if(foundSongs.length === 1) {
+                songToShow = foundSongs[0];
+            } else {
+                songToShow = foundSongs[Math.floor(Math.random() * foundSongs.length)];
+            }
+            thisDiscover.render(songToShow);
+
+            app.initPlayer('#discover .amazingPlayers');
+            
+            console.log('fyi', songToShow);
+            console.log('foundSongs', foundSongs);
+            console.log(leastUsedCategory);
             console.log(thisDiscover.categoriesObject);
         });
     }
@@ -57,7 +77,7 @@ class Discover {
 
         while(true) {
             const isThereAKey = Object.keys(thisDiscover.categoriesObject).filter((key) => thisDiscover.categoriesObject[key] === lowestValue);
-            if(isThereAKey.length !== 0) {
+            if(isThereAKey.length === 0) {
                 lowestValue++;
             } else {
                 break;
@@ -66,12 +86,11 @@ class Discover {
         console.log(lowestValue);
         return lowestValue;
     }
-    // render(data) {
-    //     const thisDiscover = this;
-    //     const generatedHTML = templates.home(data[0]);
-    //     thisDiscover.element = utils.createDOMFromHTML(generatedHTML);
-    //     thisDiscover.wrapper.appendChild(thisDiscover.element);
-    // }
+    render(songToShow) {
+        const thisDiscover = this;
+        const generatedHTML = templates.player(songToShow);
+        thisDiscover.playerWrapper.innerHTML = generatedHTML;
+    }
 }
 
 export default Discover;
