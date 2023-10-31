@@ -44,7 +44,11 @@ export const app = {
     },
     activatePage: function (pageId) {
         const thisApp = this;
-        console.log('pageId', pageId);
+        if(pageId === 'home') {
+            thisApp.categoriesWrapper.classList.add('active');
+        } else {
+            thisApp.categoriesWrapper.classList.remove('active');
+        }
         /* add class "active" to matching pages, remove from non-matching */
         for (let page of thisApp.pages) {
             page.classList.toggle(classNames.pages.active, page.id == pageId); // using with second argument as conditional in order to avoid writing whole long if statement.
@@ -77,9 +81,9 @@ export const app = {
             return links;
         });
 
-        const categoriesWrapper = document.querySelector('.categories');
+        thisApp.categoriesWrapper = document.querySelector('.categories');
    
-        categoriesWrapper.innerHTML = links;
+        thisApp.categoriesWrapper.innerHTML = links;
         const linksCategories = document.querySelectorAll('.category');
         linksCategories.forEach(link => {
             link.addEventListener('click', (e) => {
@@ -87,6 +91,7 @@ export const app = {
                 if (!link.classList.contains('active')) {
                     linksCategories.forEach(link => link.classList.remove('active'));
                     link.classList.add('active');
+                    thisApp.home.showPlayersByCategory(link.innerText);
                 } else {
                     link.classList.remove('active');
                 }
@@ -126,6 +131,7 @@ export const app = {
                 thisApp.activateCategories();
                 thisApp.generateSongs(thisApp.data.songs);
                 thisApp.initPlayer();
+                thisApp.home.showAllPlayers();
                 thisApp.initPages();
                 thisApp.discover = new Discover(thisApp.uniqueCategories, thisApp.data.songs);
             });

@@ -23,6 +23,11 @@ header > * {
     margin: 0 auto;
     font-family: $font-subpar;
     padding: 10px 15px;
+    display: none;
+}
+
+.categories.active {
+    display: flex;
 }
 
 .category {

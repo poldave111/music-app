@@ -13,7 +13,28 @@ class Home {
     getElements() {
        const thisHome = this;
        thisHome.wrapper = document.querySelector('#home-wrapper');
-       console.log(thisHome.wrapper);
+    }
+    
+    showAllPlayers() {
+        const thisHome = this;
+        thisHome.allHomePlayers.forEach((homePlayer) => { 
+            homePlayer.classList.add('active');
+        });
+    }
+
+    showPlayersByCategory(category) {
+        const thisHome = this;  
+        thisHome.allHomePlayers.forEach((homePlayer) => {
+            const audioElement = homePlayer.querySelector('audio');
+            console.log(audioElement.getAttribute('data-categories'));
+            if(audioElement.getAttribute('data-categories').includes(category)) {
+                homePlayer.classList.add('active');
+            } else {
+                homePlayer.classList.remove('active');
+            }
+            console.log(homePlayer);
+        })
+        console.log('show players by category method in Home.js', category);
     }
 
     render(data) {
@@ -21,6 +42,7 @@ class Home {
         const generatedHTML = templates.home(data[0]);
         thisHome.element = utils.createDOMFromHTML(generatedHTML);
         thisHome.wrapper.appendChild(thisHome.element);
+        thisHome.allHomePlayers = thisHome.wrapper.querySelectorAll('.player');
     }
 
 

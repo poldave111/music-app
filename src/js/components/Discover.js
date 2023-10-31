@@ -17,13 +17,13 @@ class Discover {
 
     playEventCatcher() {
         const thisDiscover = this;
-        const audioEvents = document.querySelectorAll('audio');
+        const audioEvents = document.querySelectorAll('audio'); // querySelectorAll i querySelector szukają w danym momencie, co innego getELementByClassName lub by getElementByTag szukają przy każdej zmianie
         thisDiscover.uniqueCategories.forEach((category) => {
             thisDiscover.categoriesObject[category] = 0;
         });
         audioEvents.forEach((audioEvent) => {
             audioEvent.addEventListener('play', (e) => {
-                console.log('uruchomiony', e);
+                console.log('uruchomiony', e.target, e.currentTarget);
                 const categories = e.target.getAttribute('data-categories');
                 console.log('categories', categories);
                 categories.split(',').forEach((category) => {
@@ -42,7 +42,7 @@ class Discover {
        const thisDiscover = this;
        thisDiscover.wrapper = document.querySelector('#discover-wrapper');
        thisDiscover.amazingButton = thisDiscover.wrapper.querySelector('.amazingButton');
-       thisDiscover.playerWrapper = thisDiscover.wrapper.querySelector('.players');
+       thisDiscover.playerWrapper = thisDiscover.wrapper.querySelector('.amazingPlayers');
     }
 
     initActions() {
@@ -61,7 +61,7 @@ class Discover {
             }
             thisDiscover.render(songToShow);
 
-            app.initPlayer('#discover .amazingPlayers');
+            app.initPlayer('.amazingPlayers .player');
             
             console.log('fyi', songToShow);
             console.log('foundSongs', foundSongs);
@@ -83,7 +83,6 @@ class Discover {
                 break;
             }
         }
-        console.log(lowestValue);
         return lowestValue;
     }
     render(songToShow) {

@@ -32,3 +32,10 @@
     transition: transform 0.2s;
   }
 
+  #home .player {
+    display: none!important;
+  }
+
+  #home .player.active {
+    display: flex!important;
+  }
